@@ -7,13 +7,14 @@ import {
   Platform,
   StatusBar,
   Image,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from "react-native";
 
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { RFValue } from "react-native-responsive-fontsize";
 import * as Font from "expo-font";
 import * as SplashScreen from 'expo-splash-screen';
-import { RFValue } from "react-native-responsive-fontsize";
-import Ionicons from "react-native-vector-icons/Ionicons";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -42,28 +43,30 @@ export default class StoryCard extends Component {
     if (this.state.fontsLoaded) {
       SplashScreen.hideAsync();
       return (
-        <View style={styles.container}>
-         <SafeAreaView style={styles.droidSafeArea}/>
-         <View style={styles.cardContainer}>
-            <View style={styles.storyImage}>
-                <Image source={require("../assets/story_image_1.png")} style={styles.storyImage}/>
-            </View>
-
+        <TouchableOpacity style={styles.container}
+        onPress={()=> this.props.navigation.navigate("Tela de Historias", {story:this.props.story})}>
+          <View style={styles.cardContainer}>
+            <Image source={require("../assets/story_image_5.png")} style={styles.storyImage}/>
             <View style={styles.titleContainer}>
-                <Text style={styles.storyTitleText}> {this.props.story.title} </Text>
-                <Text style={styles.storyAuthorText}> {this.props.story.author} </Text>
-                <Text style={styles.descriptionText}> {this.props.story.description} </Text>
+              <Text style={styles.storyTitleText}>
+                {this.props.story.title}
+              </Text>
+              <Text style={styles.storyAuthorText}>
+                {this.props.story.author}
+              </Text>
+              <Text style={styles.descriptionText}>
+                {this.props.story.description}
+              </Text>
             </View>
 
             <View style={styles.actionContainer}>
-                <View style={styles.likeButton}>
-                    <Ionicons name="heart" size={RFValue(30)} color={"white"}/>
-                    <Text style={styles.likeText}> 3k </Text>
-                </View>
+              <View style={styles.likeButton}>
+                <Ionicons name={"heart"} size={RFValue(30)} color={"white"}/>
+                <Text style={styles.likeText}> -1k </Text>
+              </View>
             </View>
-         </View>
-         
-        </View>
+          </View>
+        </TouchableOpacity>
       );
     }
   }
@@ -72,9 +75,6 @@ export default class StoryCard extends Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1
-    },
-    droidSafeArea: {
-        marginTop: Platform.OS === "android" ? StatusBar.currentHeight : RFValue(35)
     },
     cardContainer: {
       margin: RFValue(13),

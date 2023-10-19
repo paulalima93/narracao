@@ -21,7 +21,7 @@ let customFonts = {
   "Bubblegum-Sans": require("../assets/fonts/BubblegumSans-Regular.ttf")
 };
 
-let stories = require("../temp.json");
+let stories = require("./temp_stories.json");
 
 export default class Feed extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ export default class Feed extends Component {
   }
 
   renderItem = ({ item: story }) => {
-    return <StoryCard story={story} />;
+    return <StoryCard story={story} navigation={this.props.navigation}/>;
   };
 
   keyExtractor = (item, index) => index.toString();
