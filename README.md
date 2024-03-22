@@ -1,0 +1,3 @@
+- Projeto de aula da byju's onde os alunos criam uma rede social com temática de cadastro e leitura de histórias. 
+- Criado com react native.
+- Não está completo nesta etapa
